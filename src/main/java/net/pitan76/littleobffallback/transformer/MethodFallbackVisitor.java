@@ -17,9 +17,11 @@ public class MethodFallbackVisitor extends MethodVisitor {
         }
         if (type.startsWith("L") && type.endsWith(";")) {
             String internal = type.substring(1, type.length() - 1);
-            String mapped = AutoRemap.autoRemap(internal);
-            if (mapped != null && !mapped.equals(internal)) {
-                return "L" + mapped + ";";
+            if (internal.startsWith("net/minecraft/class_")) {
+                String mapped = AutoRemap.autoRemap(internal);
+                if (mapped != null && !mapped.equals(internal)) {
+                    return "L" + mapped + ";";
+                }
             }
             return "L" + internal + ";";
         }
@@ -28,17 +30,26 @@ public class MethodFallbackVisitor extends MethodVisitor {
 
     private String remapClass(String name) {
         if (name == null) return null;
-        return AutoRemap.autoRemap(name);
+        if (name.startsWith("net/minecraft/class_")) {
+            return AutoRemap.autoRemap(name);
+        }
+        return name;
     }
 
     private String remapField(String owner, String fieldName) {
         if (fieldName == null) return null;
-        return AutoRemap.autoRemap(fieldName);
+        if (fieldName.startsWith("field_")) {
+            return AutoRemap.autoRemap(fieldName);
+        }
+        return fieldName;
     }
 
     private String remapMethod(String owner, String methodName) {
         if (methodName == null) return null;
-        return AutoRemap.autoRemap(methodName);
+        if (methodName.startsWith("method_")) {
+            return AutoRemap.autoRemap(methodName);
+        }
+        return methodName;
     }
 
     @Override

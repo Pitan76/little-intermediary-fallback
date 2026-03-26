@@ -1,9 +1,9 @@
-package net.minecraft;
+package net.pitan76.littleobffallback.compat;
 
 import net.minecraft.core.Direction;
 
 // Direction
-public interface class_2350 {
+public interface class_2350_bridge {
     default Direction asDirection() {
         return (Direction) (Object) this;
     }
@@ -12,7 +12,7 @@ public interface class_2350 {
         return asDirection().getOpposite();
     }
 
-    static class_2350[] values() {
-        return (class_2350[]) (Object[]) Direction.values();
+    static class_2350_bridge[] values() {
+        return (class_2350_bridge[]) (Object[]) Direction.values();
     }
 }

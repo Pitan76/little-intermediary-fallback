@@ -1,11 +1,11 @@
-package net.minecraft;
+package net.pitan76.littleobffallback.compat;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 // ItemStack
-public interface class_1799 {
+public interface class_1799_bridge {
     default ItemStack asStack() {
         return (ItemStack) this;
     }

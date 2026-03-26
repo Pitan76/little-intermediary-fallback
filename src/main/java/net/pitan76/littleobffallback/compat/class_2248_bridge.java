@@ -1,5 +1,6 @@
-package net.minecraft;
+package net.pitan76.littleobffallback.compat;
 
+import net.minecraft.class_2680;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -7,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
 // Block
-public interface class_2248 {
+public interface class_2248_bridge {
 
     default Block asBlock() {
         return (Block) (Object) this;

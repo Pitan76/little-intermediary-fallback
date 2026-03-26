@@ -1,11 +1,11 @@
-package net.minecraft;
+package net.pitan76.littleobffallback.compat;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 // BlockBehavior (AbstractBlock)
-public interface class_4970 {
+public interface class_4970_bridge {
     default BlockBehaviour asBlockBehaviour() {
         return (BlockBehaviour) this;
     }
