@@ -19,6 +19,7 @@
     "ItemMixin",
     "ItemStackMixin",
     "LevelMixin",
+    "LivingEntityMixin",
     "MenuProviderMixin",
     "MutableComponentMixin",
     "NonNullListMixin",
