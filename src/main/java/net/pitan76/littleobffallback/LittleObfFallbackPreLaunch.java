@@ -2,7 +2,7 @@ package net.pitan76.littleobffallback;
 
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
-import net.pitan76.littleobffallback.transformer.MethodFallbackVisitor;
+import net.pitan76.littleobffallback.transformer.ClassFallbackVisitor;
 import org.objectweb.asm.*;
 
 import java.lang.instrument.ClassFileTransformer;
@@ -15,7 +15,7 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
     public void onPreLaunch() {
         // JVMへエージェントをアタッチ
         Instrumentation inst = ByteBuddyAgent.install();
-
+        System.out.println("[LittleObfFallback] PreLaunch: Instrumentation attached");
         inst.addTransformer(new ClassFileTransformer() {
             @Override
             public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) {
@@ -29,16 +29,10 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
                 ) {
                     return null;
                 }
-
+                System.out.println("[LittleObfFallback] Transforming: " + className);
                 ClassReader cr = new ClassReader(classfileBuffer);
                 ClassWriter cw = new ClassWriter(cr, 0);
-                ClassVisitor cv = new ClassVisitor(Opcodes.ASM9, cw) {
-                    @Override
-                    public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                        MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
-                        return new MethodFallbackVisitor(Opcodes.ASM9, mv, className);
-                    }
-                };
+                ClassVisitor cv = new ClassFallbackVisitor(Opcodes.ASM9, cw, className);
                 cr.accept(cv, 0);
                 return cw.toByteArray();
             }

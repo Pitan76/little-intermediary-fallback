@@ -1,85 +1,16 @@
-
 package net.pitan76.littleobffallback.transformer;
 
+import net.fabricmc.loader.api.MappingResolver;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
 public class MethodFallbackVisitor extends MethodVisitor {
     protected final String className;
+    private final MappingResolver mappingResolver = net.fabricmc.loader.api.FabricLoader.getInstance().getMappingResolver();
 
     public MethodFallbackVisitor(int api, MethodVisitor methodVisitor, String className) {
         super(api, methodVisitor);
         this.className = className;
-    }
-
-    // Intermediary名やフィールド名を公式名に変換する簡易リマップ
-    private String autoRemap(String name) {
-        if (name == null) return null;
-        if (name.contains("class_1297")) return "net/minecraft/world/entity/Entity";
-        if (name.contains("class_1309")) return "net/minecraft/world/entity/LivingEntity";
-        if (name.contains("class_2246")) return "net/minecraft/world/level/block/Blocks";
-        if (name.contains("class_2248")) return "net/minecraft/world/level/block/Block";
-        if (name.contains("class_4970")) return "net/minecraft/world/level/block/state/BlockBehaviour";
-        if (name.contains("class_2251")) return "net/minecraft/world/level/block/state/BlockBehaviour$Properties";
-        if (name.contains("class_2350")) return "net/minecraft/core/Direction";
-        if (name.contains("class_1799")) return "net/minecraft/world/item/ItemStack";
-        switch (name) {
-            case "field_11043": return "NORTH";
-            case "field_11035": return "SOUTH";
-            case "field_11034": return "EAST";
-            case "field_11039": return "WEST";
-            case "field_11036": return "UP";
-            case "field_11033": return "DOWN";
-        }
-        if (name.contains("field_10124")) return name.replace("field_10124", "AIR");
-        if (name.contains("field_10340")) return name.replace("field_10340", "STONE");
-        if (name.contains("field_10474")) return name.replace("field_10474", "GRANITE");
-        if (name.contains("field_10508")) return name.replace("field_10508", "DIORITE");
-        if (name.contains("field_10115")) return name.replace("field_10115", "ANDESITE");
-        if (name.contains("field_10219")) return name.replace("field_10219", "GRASS_BLOCK");
-        if (name.contains("field_10566")) return name.replace("field_10566", "DIRT");
-        if (name.contains("field_10253")) return name.replace("field_10253", "COARSE_DIRT");
-        if (name.contains("field_10520")) return name.replace("field_10520", "PODZOL");
-        if (name.contains("field_10445")) return name.replace("field_10445", "COBBLESTONE");
-        if (name.contains("field_10161")) return name.replace("field_10161", "OAK_PLANKS");
-        if (name.contains("field_9975")) return name.replace("field_9975", "SPRUCE_PLANKS");
-        if (name.contains("field_10148")) return name.replace("field_10148", "BIRCH_PLANKS");
-        if (name.contains("field_10334")) return name.replace("field_10334", "JUNGLE_PLANKS");
-        if (name.contains("field_10218")) return name.replace("field_10218", "ACACIA_PLANKS");
-        if (name.contains("field_42751")) return name.replace("field_42751", "CHERRY_PLANKS");
-        if (name.contains("field_10075")) return name.replace("field_10075", "DARK_OAK_PLANKS");
-        if (name.contains("field_54734")) return name.replace("field_54734", "PALE_OAK_WOOD");
-        if (name.contains("field_54735")) return name.replace("field_54735", "PALE_OAK_PLANKS");
-        if (name.contains("field_37577")) return name.replace("field_37577", "MANGROVE_PLANKS");
-        if (name.contains("field_40294")) return name.replace("field_40294", "BAMBOO_PLANKS");
-        if (name.contains("field_22126")) return name.replace("field_22126", "CRIMSON_PLANKS");
-        if (name.contains("field_22127")) return name.replace("field_22127", "WARPED_PLANKS");
-        if (name.contains("field_10033")) return name.replace("field_10033", "GLASS");
-        if (name.contains("field_9979")) return name.replace("field_9979", "SANDSTONE");
-        if (name.contains("field_10344")) return name.replace("field_10344", "RED_SANDSTONE");
-        if (name.contains("field_10104")) return name.replace("field_10104", "BRICKS");
-        if (name.contains("field_10056")) return name.replace("field_10056", "STONE_BRICKS");
-        if (name.contains("field_10266")) return name.replace("field_10266", "NETHER_BRICKS");
-        if (name.contains("field_9986")) return name.replace("field_9986", "RED_NETHER_BRICKS");
-        if (name.contains("field_10462")) return name.replace("field_10462", "END_STONE_BRICKS");
-        if (name.contains("field_10360")) return name.replace("field_10360", "SMOOTH_STONE");
-        if (name.contains("field_10467")) return name.replace("field_10467", "SMOOTH_SANDSTONE");
-        if (name.contains("field_10483")) return name.replace("field_10483", "SMOOTH_RED_SANDSTONE");
-        if (name.contains("field_9978")) return name.replace("field_9978", "SMOOTH_QUARTZ");
-        if (name.contains("field_10490")) return name.replace("field_10490", "YELLOW_WOOL");
-        if (name.contains("field_10028")) return name.replace("field_10028", "LIME_WOOL");
-        if (name.contains("field_10459")) return name.replace("field_10459", "PINK_WOOL");
-        if (name.contains("field_10423")) return name.replace("field_10423", "GRAY_WOOL");
-        if (name.contains("field_10222")) return name.replace("field_10222", "LIGHT_GRAY_WOOL");
-        if (name.contains("field_10619")) return name.replace("field_10619", "CYAN_WOOL");
-        if (name.contains("field_10259")) return name.replace("field_10259", "PURPLE_WOOL");
-        if (name.contains("field_10514")) return name.replace("field_10514", "BLUE_WOOL");
-        if (name.contains("field_10113")) return name.replace("field_10113", "BROWN_WOOL");
-        if (name.contains("field_10170")) return name.replace("field_10170", "GREEN_WOOL");
-        if (name.contains("field_10314")) return name.replace("field_10314", "RED_WOOL");
-        if (name.contains("field_10146")) return name.replace("field_10146", "BLACK_WOOL");
-        if (name.contains("field_10153")) return name.replace("field_10153", "QUARTZ_BLOCK");
-        if (name.contains("field_10286")) return name.replace("field_10286", "PURPUR_BLOCK");
-        return name;
     }
 
     // 型名や記述子のリマップ
@@ -87,21 +18,55 @@ public class MethodFallbackVisitor extends MethodVisitor {
         if (type == null) return null;
         if (type.startsWith("L") && type.endsWith(";")) {
             String internal = type.substring(1, type.length() - 1);
-            return "L" + autoRemap(internal) + ";";
+            return "L" + AutoRemap.autoRemap(internal) + ";";
         }
-        return autoRemap(type);
+        return AutoRemap.autoRemap(type);
+    }
+
+    // Intermediary→Officialの自動リマップ（MappingResolver利用）
+    protected String remapClass(String intermediaryName) {
+        if (intermediaryName == null) return null;
+        // internalName例: net/minecraft/class_2248
+        return mappingResolver.mapClassName("intermediary", intermediaryName.replace('.', '/'));
+    }
+
+    protected String remapField(String owner, String fieldName, String desc) {
+        if (owner == null || fieldName == null) return fieldName;
+        return mappingResolver.mapFieldName("intermediary", owner.replace('.', '/'), fieldName, desc);
+    }
+
+    protected String remapMethod(String owner, String methodName, String desc) {
+        if (owner == null || methodName == null) return methodName;
+        return mappingResolver.mapMethodName("intermediary", owner.replace('.', '/'), methodName, desc);
     }
 
     @Override
     public void visitFieldInsn(int opcode, String owner, String fieldName, String desc) {
-        boolean isIntermediary = owner.contains("class_") || fieldName.startsWith("field_");
-        if (!isIntermediary) {
-            super.visitFieldInsn(opcode, owner, fieldName, desc);
-            return;
+        boolean shouldRemap = owner.startsWith("net/minecraft/");
+        String newOwner = shouldRemap ? remapClass(owner) : owner;
+        String newFieldName = shouldRemap ? remapField(owner, fieldName, desc) : fieldName;
+        String newDesc = shouldRemap ? remapType(desc) : desc;
+        boolean changed = !owner.equals(newOwner) || !fieldName.equals(newFieldName) || !desc.equals(newDesc);
+        if (changed) {
+            System.out.println("[LittleObfFallback] visitFieldInsn: " + owner + "." + fieldName + " : " + desc +
+                    " [remap attempted]" +
+                    " => " + newOwner + "." + newFieldName + " : " + newDesc);
         }
-        String newOwner = remapType(owner);
-        String newFieldName = autoRemap(fieldName);
-        String newDesc = remapType(desc);
         super.visitFieldInsn(opcode, newOwner, newFieldName, newDesc);
+    }
+
+    @Override
+    public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
+        boolean isIntermediary = owner.contains("class_") || name.startsWith("method_");
+        String newOwner = isIntermediary ? remapClass(owner) : owner;
+        String newName = isIntermediary ? remapMethod(owner, name, descriptor) : name;
+        String newDesc = isIntermediary ? remapType(descriptor) : descriptor;
+        boolean changed = !owner.equals(newOwner) || !name.equals(newName) || !descriptor.equals(newDesc);
+        if (changed) {
+            System.out.println("[LittleObfFallback] visitMethodInsn: " + owner + "." + name + " : " + descriptor +
+                    " [remap attempted]" +
+                    " => " + newOwner + "." + newName + " : " + newDesc);
+        }
+        super.visitMethodInsn(opcode, newOwner, newName, newDesc, isInterface);
     }
 }
