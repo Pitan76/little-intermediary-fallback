@@ -18,7 +18,7 @@
     ]
   },
   "languageAdapters": {
-    "littleobffallback_hook": "net.fabricmc.fabric.api.language.JavaLanguageAdapter"
+    "littleobffallback_hook": "net.pitan76.littleobffallback.LanguageAdapterHook"
   },
   "mixins": [
     "littleobffallback.mixins.json"
