@@ -7,32 +7,32 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class class_2586 extends BlockEntity {
-    public class_2586(BlockEntityType<?> type, BlockPos worldPosition, BlockState blockState) {
-        super(type, worldPosition, blockState);
+public interface class_2586 {
+    default BlockEntity asBlockEntity() {
+        return (BlockEntity) this;
     }
 
-    public BlockEntityType<?> method_11017() {
-        return super.getType();
+    default BlockEntityType<?> method_11017() {
+        return asBlockEntity().getType();
     }
 
-    public @Nullable Level method_10997() {
-        return super.getLevel(); // getWorld()
+    default @Nullable Level method_10997() {
+        return asBlockEntity().getLevel();
     }
 
-    public BlockPos method_11016() {
-        return super.getBlockPos();
+    default BlockPos method_11016() {
+        return asBlockEntity().getBlockPos();
     }
 
-    public BlockState method_11010() {
-        return super.getBlockState(); // getCachedState()
+    default BlockState method_11010() {
+        return asBlockEntity().getBlockState();
     }
 
-    public void method_31662(Level world) {
-        super.setLevel(world); // setWorld()
+    default void method_31662(Level world) {
+        asBlockEntity().setLevel(world);
     }
 
-    public boolean method_11015() {
-        return super.isRemoved();
+    default boolean method_11015() {
+        return asBlockEntity().isRemoved();
     }
 }

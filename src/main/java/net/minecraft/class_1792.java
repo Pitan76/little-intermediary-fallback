@@ -5,34 +5,24 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 // Item
-public class class_1792 extends Item implements class_1935 {
-
-    public class_1792(Properties properties) {
-        super(properties);
+public interface class_1792 {
+    default Item asItem() {
+        return (Item) this;
     }
 
-    public class_1792(class_1793 properties) {
-        super(properties);
+    default Component method_63680() {
+        return asItem().getName(asItem().getDefaultInstance());
     }
 
-    public Component method_63680() {
-        return super.getName(getDefaultInstance());
+    default ItemStack method_7854() {
+        return asItem().getDefaultInstance();
     }
 
-    @Override
-    public Item method_8389() {
-        return asItem();
+    default int method_7882() {
+        return asItem().getDefaultMaxStackSize();
     }
 
-    public ItemStack method_7854() {
-        return super.getDefaultInstance();
-    }
-
-    public int method_7882() {
-        return super.getDefaultMaxStackSize();
-    }
-
-    public static class class_1793 extends Properties {
+    public static class class_1793 extends Item.Properties {
         public class_1793() {
             super();
         }

@@ -2,6 +2,7 @@ package net.minecraft;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 // Container (Inventory)
@@ -43,7 +44,7 @@ public interface class_1263 extends Container {
         this.clearContent(); // clear();
     }
 
-    default int method_18861(class_1792 item) {
+    default int method_18861(Item item) {
         return this.countItem(item); // count(Item item);
     }
 

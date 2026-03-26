@@ -1,22 +1,20 @@
 package net.minecraft;
 
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
-// Block
-public class class_2248a extends Block {
-    public class_2248a(Properties properties) {
+// BlockBehavior (AbstractBlock)
+public abstract class class_4970a extends BlockBehaviour implements class_4970 {
+    public class_4970a(Properties properties) {
         super(properties);
     }
 
-    public class_2248a(class_4970.class_2251 properties) {
+    public class_4970a(class_4970.class_2251 properties) {
         super(properties);
     }
-
-    // BlockBehavior (AbstractBlock)
 
     public Item method_8389() {
         return asItem();
@@ -30,17 +28,11 @@ public class class_2248a extends Block {
         return super.getFluidState(state);
     }
 
+    protected FluidState method_9545(class_2680 state) {
+        return super.getFluidState((BlockState) (Object) state);
+    }
+
     public float method_36555() {
-        return super.defaultDestroyTime(); // getHardness()
-    }
-
-    // ----
-
-    public MutableComponent method_9518() {
-        return super.getName();
-    }
-
-    public final BlockState method_9564() {
-        return this.defaultBlockState();
+        return super.defaultDestroyTime();
     }
 }

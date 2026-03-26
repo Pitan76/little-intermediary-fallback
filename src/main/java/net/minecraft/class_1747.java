@@ -1,10 +1,9 @@
 package net.minecraft;
 
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.level.block.Block;
 
-public class class_1747 extends BlockItem {
-    public class_1747(Block block, Properties properties) {
-        super(block, properties);
+public interface class_1747 extends class_1792 {
+    default BlockItem asBlockItem() {
+        return (BlockItem) (Object) this;
     }
 }

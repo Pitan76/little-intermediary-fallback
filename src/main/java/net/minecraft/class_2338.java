@@ -1,72 +1,62 @@
 package net.minecraft;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 
 // BlockPos
-public class class_2338 extends BlockPos {
-
-    public class_2338(int x, int y, int z) {
-        super(x, y, z);
+public interface class_2338 {
+    default BlockPos asBlockPos() {
+        return (BlockPos) (Object) this;
     }
 
-    public class_2338(Vec3i vec3i) {
-        super(vec3i);
+    default int method_10263() {
+        return asBlockPos().getX();
     }
 
-    public class_2338(class_2382 vec3i) {
-        super(vec3i);
+    default int method_10264() {
+        return asBlockPos().getY();
     }
 
-    public int method_10263() {
-        return super.getX();
+    default int method_10260() {
+        return asBlockPos().getZ();
     }
 
-    public int method_10264() {
-        return super.getY();
+    default BlockPos method_30931() {
+        return asBlockPos().above();
     }
 
-    public int method_10260() {
-        return super.getZ();
+    default BlockPos method_23228() {
+        return asBlockPos().below();
     }
 
-    public BlockPos method_30931() {
-        return super.above(); // up()
+    default BlockPos method_35861() {
+        return asBlockPos().north();
     }
 
-    public BlockPos method_23228() {
-        return super.below(); // down()
+    default BlockPos method_35859() {
+        return asBlockPos().south();
     }
 
-    public BlockPos method_35861() {
-        return super.north();
+    default BlockPos method_35855() {
+        return asBlockPos().east();
     }
 
-    public BlockPos method_35859() {
-        return super.south();
+    default BlockPos method_35857() {
+        return asBlockPos().west();
     }
 
-    public BlockPos method_35855() {
-        return super.east();
+    default BlockPos method_35853(class_2382 vec3i) {
+        return asBlockPos().offset((net.minecraft.core.Vec3i) (Object) vec3i);
     }
 
-    public BlockPos method_35857() {
-        return super.west();
+    default BlockPos method_34592(int i, int j, int k) {
+        return asBlockPos().offset(i, j, k);
     }
 
-    public BlockPos method_35853(class_2382 vec3i) {
-        return super.offset(vec3i); // add(vec3i)
+    default BlockPos method_35852(class_2382 vec3i) {
+        return asBlockPos().subtract((net.minecraft.core.Vec3i) (Object) vec3i);
     }
 
-    public BlockPos method_34592(int i, int j, int k) {
-        return super.offset(i, j, k); // add(i, j, k)
-    }
-
-    public BlockPos method_35852(class_2382 vec3i) {
-        return super.subtract(vec3i);
-    }
-
-    public BlockPos method_35862(int i) {
-        return super.multiply(i);
+    default BlockPos method_35862(int i) {
+        return asBlockPos().multiply(i);
     }
 }
