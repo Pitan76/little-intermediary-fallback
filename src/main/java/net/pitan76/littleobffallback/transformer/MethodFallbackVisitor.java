@@ -1,55 +1,58 @@
 package net.pitan76.littleobffallback.transformer;
 
-import net.fabricmc.loader.api.MappingResolver;
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
 public class MethodFallbackVisitor extends MethodVisitor {
     protected final String className;
-    private final MappingResolver mappingResolver = net.fabricmc.loader.api.FabricLoader.getInstance().getMappingResolver();
 
     public MethodFallbackVisitor(int api, MethodVisitor methodVisitor, String className) {
         super(api, methodVisitor);
         this.className = className;
     }
 
-    // 型名や記述子のリマップ
     private String remapType(String type) {
         if (type == null) return null;
+        if (type.startsWith("[")) {
+            return "[" + remapType(type.substring(1));
+        }
         if (type.startsWith("L") && type.endsWith(";")) {
             String internal = type.substring(1, type.length() - 1);
-            return "L" + AutoRemap.autoRemap(internal) + ";";
+            String mapped = AutoRemap.autoRemap(internal);
+            if (mapped != null && !mapped.equals(internal)) {
+                return "L" + mapped + ";";
+            }
+            return "L" + internal + ";";
         }
-        return AutoRemap.autoRemap(type);
+        return type;
     }
 
-    // Intermediary→Officialの自動リマップ（MappingResolver利用）
-    protected String remapClass(String intermediaryName) {
-        if (intermediaryName == null) return null;
-        // internalName例: net/minecraft/class_2248
-        return mappingResolver.mapClassName("intermediary", intermediaryName.replace('.', '/'));
+    private String remapClass(String name) {
+        if (name == null) return null;
+        return AutoRemap.autoRemap(name);
     }
 
-    protected String remapField(String owner, String fieldName, String desc) {
-        if (owner == null || fieldName == null) return fieldName;
-        return mappingResolver.mapFieldName("intermediary", owner.replace('.', '/'), fieldName, desc);
+    private String remapField(String owner, String fieldName) {
+        if (fieldName == null) return null;
+        return AutoRemap.autoRemap(fieldName);
     }
 
-    protected String remapMethod(String owner, String methodName, String desc) {
-        if (owner == null || methodName == null) return methodName;
-        return mappingResolver.mapMethodName("intermediary", owner.replace('.', '/'), methodName, desc);
+    private String remapMethod(String owner, String methodName) {
+        if (methodName == null) return null;
+        return AutoRemap.autoRemap(methodName);
     }
 
     @Override
     public void visitFieldInsn(int opcode, String owner, String fieldName, String desc) {
-        boolean shouldRemap = owner.startsWith("net/minecraft/");
+        boolean shouldRemap = 
+            (owner != null && owner.contains("class_")) ||
+            (fieldName != null && fieldName.contains("field_")) ||
+            (desc != null && desc.contains("class_"));
         String newOwner = shouldRemap ? remapClass(owner) : owner;
-        String newFieldName = shouldRemap ? remapField(owner, fieldName, desc) : fieldName;
+        String newFieldName = shouldRemap ? remapField(owner, fieldName) : fieldName;
         String newDesc = shouldRemap ? remapType(desc) : desc;
-        boolean changed = !owner.equals(newOwner) || !fieldName.equals(newFieldName) || !desc.equals(newDesc);
+        boolean changed = !java.util.Objects.equals(owner, newOwner) || !java.util.Objects.equals(fieldName, newFieldName) || !java.util.Objects.equals(desc, newDesc);
         if (changed) {
             System.out.println("[LittleObfFallback] visitFieldInsn: " + owner + "." + fieldName + " : " + desc +
-                    " [remap attempted]" +
                     " => " + newOwner + "." + newFieldName + " : " + newDesc);
         }
         super.visitFieldInsn(opcode, newOwner, newFieldName, newDesc);
@@ -57,16 +60,37 @@ public class MethodFallbackVisitor extends MethodVisitor {
 
     @Override
     public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
-        boolean isIntermediary = owner.contains("class_") || name.startsWith("method_");
-        String newOwner = isIntermediary ? remapClass(owner) : owner;
-        String newName = isIntermediary ? remapMethod(owner, name, descriptor) : name;
-        String newDesc = isIntermediary ? remapType(descriptor) : descriptor;
-        boolean changed = !owner.equals(newOwner) || !name.equals(newName) || !descriptor.equals(newDesc);
+        boolean shouldRemap = 
+            (owner != null && owner.contains("class_")) ||
+            (name != null && name.contains("method_")) ||
+            (descriptor != null && descriptor.contains("class_"));
+        String newOwner = shouldRemap ? remapClass(owner) : owner;
+        String newName = shouldRemap ? remapMethod(owner, name) : name;
+        String newDesc = shouldRemap ? remapType(descriptor) : descriptor;
+        boolean changed = !java.util.Objects.equals(owner, newOwner) || !java.util.Objects.equals(name, newName) || !java.util.Objects.equals(descriptor, newDesc);
         if (changed) {
             System.out.println("[LittleObfFallback] visitMethodInsn: " + owner + "." + name + " : " + descriptor +
-                    " [remap attempted]" +
                     " => " + newOwner + "." + newName + " : " + newDesc);
         }
         super.visitMethodInsn(opcode, newOwner, newName, newDesc, isInterface);
+    }
+
+    @Override
+    public void visitTypeInsn(int opcode, String type) {
+        String newType = (type != null && type.contains("class_")) ? remapClass(type) : type;
+        if (!java.util.Objects.equals(type, newType)) {
+            System.out.println("[LittleObfFallback] visitTypeInsn: " + type + " => " + newType);
+        }
+        super.visitTypeInsn(opcode, newType);
+    }
+
+    @Override
+    public void visitLocalVariable(String name, String desc, String signature, org.objectweb.asm.Label start, org.objectweb.asm.Label end, int index) {
+        String newDesc = (desc != null && desc.contains("class_")) ? remapType(desc) : desc;
+        String newSig = (signature != null && signature.contains("class_")) ? remapType(signature) : signature;
+        if (!java.util.Objects.equals(desc, newDesc) || !java.util.Objects.equals(signature, newSig)) {
+            System.out.println("[LittleObfFallback] visitLocalVariable: " + name + " : " + desc + ", " + signature + " => " + newDesc + ", " + newSig);
+        }
+        super.visitLocalVariable(name, newDesc, newSig, start, end, index);
     }
 }
