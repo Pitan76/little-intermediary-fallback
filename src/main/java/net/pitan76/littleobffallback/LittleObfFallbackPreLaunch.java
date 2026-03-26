@@ -68,7 +68,7 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
 
                                         // Force cast class_4970 to BlockBehaviour when it's used as a method argument or return type
                                         super.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/world/level/block/state/BlockBehaviour");
-                                        super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
+                                        super.visitMethodInsn(opcode, owner, name, fixedDescriptor, isInterface);
 
                                         System.out.println("[LittleObfFallback] ASM Patched Method Descriptor: " + owner + "." + name + " -> " + fixedDescriptor);
                                         return;
