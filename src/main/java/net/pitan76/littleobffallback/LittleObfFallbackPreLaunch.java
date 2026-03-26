@@ -52,6 +52,69 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
                                         return;
                                     }
                                 }
+
+                                // class_2246 (Blocks)
+                                if (opcode == Opcodes.GETSTATIC && owner.equals("net/minecraft/class_2246")) {
+                                    String realBlock = switch (fieldName) {
+                                        case "field_10124" -> "AIR";
+                                        case "field_10340" -> "STONE";
+                                        case "field_10474" -> "GRANITE";
+                                        case "field_10508" -> "DIORITE";
+                                        case "field_10115" -> "ANDESITE";
+                                        case "field_10219" -> "GRASS_BLOCK";
+                                        case "field_10566" -> "DIRT";
+                                        case "field_10253" -> "COARSE_DIRT";
+                                        case "field_10520" -> "PODZOL";
+                                        case "field_10445" -> "COBBLESTONE";
+                                        case "field_10161" -> "OAK_PLANKS";
+                                        case "field_9975" -> "SPRUCE_PLANKS";
+                                        case "field_10148" -> "BIRCH_PLANKS";
+                                        case "field_10334" -> "JUNGLE_PLANKS";
+                                        case "field_10218" -> "ACACIA_PLANKS";
+                                        case "field_42751" -> "CHERRY_PLANKS";
+                                        case "field_10075" -> "DARK_OAK_PLANKS";
+                                        case "field_54734" -> "PALE_OAK_WOOD";
+                                        case "field_54735" -> "PALE_OAK_PLANKS";
+                                        case "field_37577" -> "MANGROVE_PLANKS";
+                                        case "field_40294" -> "BAMBOO_PLANKS";
+                                        case "field_22126" -> "CRIMSON_PLANKS";
+                                        case "field_22127" -> "WARPED_PLANKS";
+                                        case "field_10033" -> "GLASS";
+                                        case "field_9979" -> "SANDSTONE";
+                                        case "field_10344" -> "RED_SANDSTONE";
+                                        case "field_10104" -> "BRICKS";
+                                        case "field_10056" -> "STONE_BRICKS";
+                                        case "field_10266" -> "NETHER_BRICKS";
+                                        case "field_9986" -> "RED_NETHER_BRICKS";
+                                        case "field_10462" -> "END_STONE_BRICKS";
+                                        case "field_10360" -> "SMOOTH_STONE";
+                                        case "field_10467" -> "SMOOTH_SANDSTONE";
+                                        case "field_10483" -> "SMOOTH_RED_SANDSTONE";
+                                        case "field_9978" -> "SMOOTH_QUARTZ";
+                                        case "field_10490" -> "YELLOW_WOOL";
+                                        case "field_10028" -> "LIME_WOOL";
+                                        case "field_10459" -> "PINK_WOOL";
+                                        case "field_10423" -> "GRAY_WOOL";
+                                        case "field_10222" -> "LIGHT_GRAY_WOOL";
+                                        case "field_10619" -> "CYAN_WOOL";
+                                        case "field_10259" -> "PURPLE_WOOL";
+                                        case "field_10514" -> "BLUE_WOOL";
+                                        case "field_10113" -> "BROWN_WOOL";
+                                        case "field_10170" -> "GREEN_WOOL";
+                                        case "field_10314" -> "RED_WOOL";
+                                        case "field_10146" -> "BLACK_WOOL";
+                                        default -> null;
+                                    };
+
+                                    if (realBlock != null) {
+                                        // Replace the obfuscated field access with the real field name
+                                        super.visitFieldInsn(Opcodes.GETSTATIC, "net/minecraft/world/level/block/Blocks", realBlock, "Lnet/minecraft/world/level/block/Block;");
+
+//                                        super.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/class_2248");
+                                        return;
+                                    }
+                                }
+
                                 super.visitFieldInsn(opcode, owner, fieldName, desc);
                             }
                         };
