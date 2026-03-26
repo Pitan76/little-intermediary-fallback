@@ -11,17 +11,15 @@ import java.security.ProtectionDomain;
 
 public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
 
-
     @Override
     public void onPreLaunch() {
-        // Attach a dynamic agent to the running JVM
+        // JVMへエージェントをアタッチ
         Instrumentation inst = ByteBuddyAgent.install();
 
         inst.addTransformer(new ClassFileTransformer() {
             @Override
             public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) {
-
-                // mod class only
+                // modクラスのみ対象、特定パッケージは除外
                 if (className == null
                         || !className.startsWith("net/pitan76/")
                         || className.startsWith("net/pitan76/littleobffallback/")
@@ -32,43 +30,18 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
                     return null;
                 }
 
-
                 ClassReader cr = new ClassReader(classfileBuffer);
                 ClassWriter cw = new ClassWriter(cr, 0);
-
-//                ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES) {
-//                    @Override
-//                    protected String getCommonSuperClass(String type1, String type2) {
-//                        return "java/lang/Object";
-//                    }
-//                };
-
                 ClassVisitor cv = new ClassVisitor(Opcodes.ASM9, cw) {
-
-//                    @Override
-//                    public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-//                        // class_2246 -> Blocks
-//                        if (interfaces != null) {
-//                            for (int i = 0; i < interfaces.length; i++) {
-//                                if (interfaces[i].equals("net/minecraft/class_2246")) {
-//                                    interfaces[i] = "net/minecraft/world/level/block/Blocks";
-//                                }
-//                            }
-//                        }
-//                        super.visit(version, access, name, signature, superName, interfaces);
-//                    }
-
                     @Override
                     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
                         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
                         return new MethodFallbackVisitor(Opcodes.ASM9, mv, className);
                     }
                 };
-
                 cr.accept(cv, 0);
-                return cw.toByteArray(); // return the modified class bytes
+                return cw.toByteArray();
             }
-
         });
 
         System.out.println("[LittleObfFallback] Global ASM Transformer injected successfully.");
