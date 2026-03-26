@@ -47,6 +47,20 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
 //                };
 
                 ClassVisitor cv = new ClassVisitor(Opcodes.ASM9, cw) {
+
+                    @Override
+                    public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+                        // class_2246 -> Blocks
+                        if (interfaces != null) {
+                            for (int i = 0; i < interfaces.length; i++) {
+                                if (interfaces[i].equals("net/minecraft/class_2246")) {
+                                    interfaces[i] = "net/minecraft/world/level/block/Blocks";
+                                }
+                            }
+                        }
+                        super.visit(version, access, name, signature, superName, interfaces);
+                    }
+
                     @Override
                     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
                         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
@@ -54,6 +68,10 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
 
                             @Override
                             public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
+
+                                // class_2246 -> Blocks
+                                if (owner.equals("net/minecraft/class_2246"))
+                                    owner = "net/minecraft/world/level/block/Blocks";
 
                                 // MCPitanLib BlockState.of(class_2248)
                                 if (owner.equals("net/pitan76/mcpitanlib/midohra/block/BlockState") && name.equals("of")) {
@@ -98,6 +116,11 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
 
                             @Override
                             public void visitFieldInsn(int opcode, String owner, String fieldName, String desc) {
+
+                                // class_2246 -> Blocks
+                                if (owner.equals("net/minecraft/class_2246"))
+                                    owner = "net/minecraft/world/level/block/Blocks";
+
                                 // class_2350 (Direction)
                                 if (opcode == Opcodes.GETSTATIC && owner.equals("net/minecraft/class_2350")) {
                                     String realDir = switch (fieldName) {
@@ -117,7 +140,8 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
                                 }
 
                                 // class_2246 (Blocks)
-                                if (opcode == Opcodes.GETSTATIC && owner.equals("net/minecraft/class_2246")) {
+                                if (opcode == Opcodes.GETSTATIC && owner.equals("net/minecraft/world/level/block/Blocks")) {
+
                                     String realBlock = switch (fieldName) {
                                         case "field_10124" -> "AIR";
                                         case "field_10340" -> "STONE";
@@ -166,6 +190,8 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
                                         case "field_10170" -> "GREEN_WOOL";
                                         case "field_10314" -> "RED_WOOL";
                                         case "field_10146" -> "BLACK_WOOL";
+                                        case "field_10153" -> "QUARTZ_BLOCK";
+                                        case "field_10286" -> "PURPUR_BLOCK";
                                         default -> null;
                                     };
 
