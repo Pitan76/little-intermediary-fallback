@@ -55,6 +55,20 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
                             @Override
                             public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
 
+                                // MCPitanLib BlockState.of(class_2248)
+                                if (owner.equals("net/pitan76/mcpitanlib/midohra/block/BlockState") && name.equals("of")) {
+                                    if (descriptor.contains("Lnet/minecraft/class_2248;")) {
+                                        String fixedDescriptor = descriptor.replace("Lnet/minecraft/class_2248;"
+                                                , "Lnet/minecraft/world/level/block/Block;");
+
+                                        super.visitTypeInsn(Opcodes.CHECKCAST, "net/minecraft/world/level/block/Block");
+                                        super.visitMethodInsn(opcode, owner, name, fixedDescriptor, isInterface);
+                                        System.out.println("[LittleObfFallback] ASM Patched Method Descriptor: " + owner + "." + name + " -> " + fixedDescriptor);
+                                        return;
+                                    }
+                                }
+
+
                                 // MCPitanLib CompatibleBlockSettings.copy()
                                 if (owner.equals("net/pitan76/mcpitanlib/api/block/v2/CompatibleBlockSettings") && name.equals("copy")) {
                                     if (descriptor.contains("Lnet/minecraft/class_4970;")) {
