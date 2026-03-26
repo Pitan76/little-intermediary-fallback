@@ -19,6 +19,7 @@
     "ItemStackMixin",
     "LevelMixin",
     "MutableComponentMixin",
+    "MenuProviderMixin",
     "NonNullListMixin",
     "PropertyMixin",
     "SlotMixin",
