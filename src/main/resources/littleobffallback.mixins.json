@@ -19,13 +19,13 @@
     "ItemStackMixin",
     "LevelMixin",
     "MutableComponentMixin",
+    "NonNullListMixin",
     "PropertyMixin",
     "SlotMixin",
     "Vec3iMixin",
     "Vec3Mixin"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1
