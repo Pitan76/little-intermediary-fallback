@@ -20,7 +20,7 @@ public class LittleObfFallbackPreLaunch implements PreLaunchEntrypoint {
                 if (className == null || className.startsWith("net/pitan76/littleobffallback/")) {
                     return null;
                 }
-                System.out.println("[LittleObfFallback] Transforming: " + className);
+//                System.out.println("[LittleObfFallback] Transforming: " + className);
                 try {
                     ClassReader cr = new ClassReader(classfileBuffer);
                     ClassWriter cw = new ClassWriter(cr, 0);

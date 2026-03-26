@@ -3,15 +3,17 @@ package net.pitan76.littleobffallback.transformer;
 public class AutoRemap {
     // Intermediary名やフィールド名を公式名に変換する簡易リマップ
     public static String autoRemap(String name) {
+        System.out.println("[LittleObfFallback] autoRemap: " + name);
+
         if (name == null) return null;
-        if (name.contains("class_1297")) return "net/minecraft/world/entity/Entity";
-        if (name.contains("class_1309")) return "net/minecraft/world/entity/LivingEntity";
-        if (name.contains("class_2246")) return "net/minecraft/world/level/block/Blocks";
-        if (name.contains("class_2248")) return "net/minecraft/world/level/block/Block";
-        if (name.contains("class_4970")) return "net/minecraft/world/level/block/state/BlockBehaviour";
-        if (name.contains("class_2251")) return "net/minecraft/world/level/block/state/BlockBehaviour$Properties";
-        if (name.contains("class_2350")) return "net/minecraft/core/Direction";
-        if (name.contains("class_1799")) return "net/minecraft/world/item/ItemStack";
+        if (name.equals("net/minecraft/class_1297")) return "net/minecraft/world/entity/Entity";
+        if (name.equals("net/minecraft/class_1309")) return "net/minecraft/world/entity/LivingEntity";
+        if (name.equals("net/minecraft/class_2246")) return "net/minecraft/world/level/block/Blocks";
+        if (name.equals("net/minecraft/class_2248")) return "net/minecraft/world/level/block/Block";
+        if (name.equals("net/minecraft/class_4970")) return "net/minecraft/world/level/block/state/BlockBehaviour";
+        if (name.equals("net/minecraft/class_4970$class_2251")) return "net/minecraft/world/level/block/state/BlockBehaviour$Properties";
+        if (name.equals("net/minecraft/class_2350")) return "net/minecraft/core/Direction";
+        if (name.equals("net/minecraft/class_1799")) return "net/minecraft/world/item/ItemStack";
         switch (name) {
             case "field_11043": return "NORTH";
             case "field_11035": return "SOUTH";
