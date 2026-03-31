@@ -1,5 +1,8 @@
 package net.pitan76.littleobffallback.asm;
 
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -128,6 +131,9 @@ public class MappingRegistry {
         addClass("net/minecraft/class_265", VoxelShape.class);
         addClass("net/minecraft/class_259", Shapes.class);
         addClass("net/minecraft/class_2540", FriendlyByteBuf.class);
+        addClass("net/minecraft/class_437", Screen.class);
+        addClass("net/minecraft/class_364", GuiEventListener.class);
+        addClass("net/minecraft/class_827", BlockEntityRenderer.class);
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
