@@ -7,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
@@ -140,6 +142,8 @@ public class MappingRegistry {
         addClass("net/minecraft/class_1263", Container.class);
         addClass("net/minecraft/class_1661", Inventory.class);
         addClass("net/minecraft/class_1735", Slot.class);
+        addClass("net/minecraft/class_2561", Component.class);
+        addClass("net/minecraft/class_5250", MutableComponent.class);
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
@@ -165,6 +169,18 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_1735", "method_53512", "set");
         addMethod("net/minecraft/class_1735", "method_7677", "getItem");
         addMethod("net/minecraft/class_1735", "method_7680", "mayPlace");
+
+        // Component
+        addMethod("net/minecraft/class_2561", "method_10866", "getStyle");
+        addMethod("net/minecraft/class_2561", "method_10851", "getContents");
+        addMethod("net/minecraft/class_2561", "method_10858", "getString");
+        addMethod("net/minecraft/class_2561", "method_10855", "getSiblings");
+        addMethod("net/minecraft/class_2561", "method_44745", "contains");
+        addMethod("net/minecraft/class_2561", "method_30163", "nullToEmpty");
+        addMethod("net/minecraft/class_2561", "method_43470", "literal");
+        addMethod("net/minecraft/class_2561", "method_43471", "translatable");
+        addMethod("net/minecraft/class_2561", "method_43469", "translatableWithArgs");
+        addMethod("net/minecraft/class_2561", "method_43473", "empty");
 
         // Items
         addField("net/minecraft/class_2246", "field_10124", "AIR");
