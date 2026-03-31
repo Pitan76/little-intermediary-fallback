@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
@@ -146,6 +147,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2561", Component.class);
         addClass("net/minecraft/class_5250", MutableComponent.class);
         addClass("net/minecraft/class_2371", NonNullList.class);
+        addClass("net/minecraft/class_1277", SimpleContainer.class);
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
