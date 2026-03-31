@@ -2,6 +2,7 @@ package net.pitan76.littleobffallback.transformer;
 
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.util.Objects;
 
@@ -81,6 +82,11 @@ public class MethodFallbackVisitor extends MethodVisitor {
             System.out.println("[LittleObfFallback] visitMethodInsn: " + owner + "." + name + " => " +
                     " => " + newOwner + "." + newName + ", desc: " + descriptor + " => " + newDesc);
         }
+
+
+        System.out.println("[LittleObfFallback] visitMethodInsn: " + owner + "." + name + " => " +
+                " => " + newOwner + "." + newName + ", desc: " + descriptor + " => " + newDesc);
+
         super.visitMethodInsn(opcode, newOwner, newName, newDesc, isInterface);
     }
 

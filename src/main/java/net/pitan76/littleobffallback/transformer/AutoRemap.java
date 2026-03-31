@@ -1,5 +1,6 @@
 package net.pitan76.littleobffallback.transformer;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 
@@ -9,8 +10,8 @@ public class AutoRemap {
         System.out.println("[LittleObfFallback] autoRemapClass: " + name);
 
         return switch (name) {
+            case "net/minecraft/class_1309" -> simplifiedDesc(LivingEntity.class.descriptorString());
             case "net/minecraft/class_1297" -> "net/minecraft/world/entity/Entity";
-            case "net/minecraft/class_1309" -> "net/minecraft/world/entity/LivingEntity";
             case "net/minecraft/class_2246" -> "net/minecraft/world/level/block/Blocks";
             case "net/minecraft/class_2248" -> "net/minecraft/world/level/block/Block";
             case "net/minecraft/class_4970" -> "net/minecraft/world/level/block/state/BlockBehaviour";
@@ -18,7 +19,7 @@ public class AutoRemap {
             case "net/minecraft/class_2350" -> "net/minecraft/core/Direction";
             case "net/minecraft/class_1799" -> "net/minecraft/world/item/ItemStack";
             case "net/minecraft/class_2769" -> simplifiedDesc(Property.class.descriptorString());
-            case "net/minecraft/class_2680" -> simplifiedDesc(BlockState.class.descriptorString());
+//            case "net/minecraft/class_2680" -> simplifiedDesc(BlockState.class.descriptorString());
             default -> name;
         };
     }
