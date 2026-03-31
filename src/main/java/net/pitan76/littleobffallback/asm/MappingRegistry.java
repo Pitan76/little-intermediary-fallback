@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -144,6 +145,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_1735", Slot.class);
         addClass("net/minecraft/class_2561", Component.class);
         addClass("net/minecraft/class_5250", MutableComponent.class);
+        addClass("net/minecraft/class_2371", NonNullList.class);
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
@@ -181,6 +183,13 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2561", "method_43471", "translatable");
         addMethod("net/minecraft/class_2561", "method_43469", "translatableWithArgs");
         addMethod("net/minecraft/class_2561", "method_43473", "empty");
+
+        // NonNullList
+        addMethod("net/minecraft/class_2371", "method_10211", "create");
+        addMethod("net/minecraft/class_2371", "method_37434", "createWithCapacity");
+        addMethod("net/minecraft/class_2371", "method_10213", "withSize");
+        addMethod("net/minecraft/class_2371", "method_10212", "of");
+
 
         // Items
         addField("net/minecraft/class_2246", "field_10124", "AIR");
