@@ -1,5 +1,6 @@
 package net.pitan76.littleobffallback.asm;
 
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -148,6 +149,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_5250", MutableComponent.class);
         addClass("net/minecraft/class_2371", NonNullList.class);
         addClass("net/minecraft/class_1277", SimpleContainer.class);
+        addClass("net/minecraft/class_327", Font.class);
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
