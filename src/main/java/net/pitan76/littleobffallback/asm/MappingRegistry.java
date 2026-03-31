@@ -1,4 +1,4 @@
-package net.pitan76.littleobffallback;
+package net.pitan76.littleobffallback.asm;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;

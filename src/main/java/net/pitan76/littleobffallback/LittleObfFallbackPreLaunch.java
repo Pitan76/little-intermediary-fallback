@@ -2,6 +2,7 @@ package net.pitan76.littleobffallback;
 
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
+import net.pitan76.littleobffallback.asm.LittleObfFallbackTransformer;
 
 import java.lang.instrument.Instrumentation;
 
