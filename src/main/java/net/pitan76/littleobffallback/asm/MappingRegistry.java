@@ -194,6 +194,8 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2371", "method_10213", "withSize");
         addMethod("net/minecraft/class_2371", "method_10212", "of");
 
+        // ItemStack
+        addMethod("net/minecraft/class_1799", "method_7960", "isEmpty");
 
         // Items
         addField("net/minecraft/class_2246", "field_10124", "AIR");
