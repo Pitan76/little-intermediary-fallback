@@ -2,6 +2,7 @@ package net.pitan76.littleobffallback.asm;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -120,6 +121,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_3737", SimpleWaterloggedBlock.class);
         addClass("net/minecraft/class_265", VoxelShape.class);
         addClass("net/minecraft/class_259", Shapes.class);
+        addClass("net/minecraft/class_2540", FriendlyByteBuf.class);
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
