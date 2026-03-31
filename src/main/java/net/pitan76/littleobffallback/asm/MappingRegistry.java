@@ -1,6 +1,7 @@
 package net.pitan76.littleobffallback.asm;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
@@ -13,7 +14,11 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -97,12 +102,12 @@ public class MappingRegistry {
         addClass("net/minecraft/class_1297", Entity.class);
         addClass("net/minecraft/class_1542", ItemEntity.class);
         addClass("net/minecraft/class_1303", ExperienceOrb.class);
-        addClass("net/minecraft/class_2246", "net/minecraft/world/level/block/Blocks");
-        addClass("net/minecraft/class_2248", "net/minecraft/world/level/block/Block");
-        addClass("net/minecraft/class_2350", "net/minecraft/core/Direction");
-        addClass("net/minecraft/class_1799", "net/minecraft/world/item/ItemStack");
-        addClass("net/minecraft/class_4970", "net/minecraft/world/level/block/state/BlockBehaviour");
-        addClass("net/minecraft/class_4970$class_2251", "net/minecraft/world/level/block/state/BlockBehaviour$Properties");
+        addClass("net/minecraft/class_2248", Block.class);
+        addClass("net/minecraft/class_2246", Blocks.class);
+        addClass("net/minecraft/class_2350", Direction.class);
+        addClass("net/minecraft/class_1799", ItemStack.class);
+        addClass("net/minecraft/class_4970", BlockBehaviour.class);
+        addClass("net/minecraft/class_4970$class_2251", BlockBehaviour.Properties.class);
         addClass("net/minecraft/class_243", Vec3.class);
         addClass("net/minecraft/class_3218", ServerLevel.class);
         addClass("net/minecraft/class_1937", Level.class);
@@ -116,6 +121,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2680", BlockState.class);
         addClass("net/minecraft/class_4970$class_4971", BlockBehaviour.BlockStateBase.class);
         addClass("net/minecraft/class_1792", Item.class);
+        addClass("net/minecraft/class_1802", Items.class);
         addClass("net/minecraft/class_1747", BlockItem.class);
         addClass("net/minecraft/class_1793", Item.Properties.class);
         addClass("net/minecraft/class_3737", SimpleWaterloggedBlock.class);
@@ -181,6 +187,15 @@ public class MappingRegistry {
         addField("net/minecraft/class_2246", "field_10146", "BLACK_WOOL");
         addField("net/minecraft/class_2246", "field_10153", "QUARTZ_BLOCK");
         addField("net/minecraft/class_2246", "field_10286", "PURPUR_BLOCK");
+
+        addField("net/minecraft/class_1802", "field_8162", "AIR");
+        addField("net/minecraft/class_1802", "field_20390", "BRICKS");
+        addField("net/minecraft/class_1802", "field_8342", "BRICK_SLAB");
+        addField("net/minecraft/class_1802", "field_8280", "GLASS");
+        addField("net/minecraft/class_1802", "field_8705", "WATER_BUCKET");
+
+        // ItemStack.EMPTY
+        addField("net/minecraft/class_1799", "field_8037", "EMPTY");
 
         addField("net/minecraft/class_2350", "field_11033", "DOWN");
         addField("net/minecraft/class_2350", "field_11036", "UP");
