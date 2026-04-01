@@ -1,6 +1,5 @@
 package net.pitan76.littleobffallback.asm;
 
-import net.fabricmc.fabric.api.transfer.v1.item.ContainerStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -40,6 +39,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -165,7 +166,11 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2487", CompoundTag.class);
         addClass("net/minecraft/class_1301", EntitySelector.class); // EntityPredicates
         addClass("net/minecraft/class_238", AABB.class); // Box
-        addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", ContainerStorage.class); // InventoryStorage
+        addClass("net/minecraft/class_3610", FluidState.class);
+        addClass("net/minecraft/class_3611", Fluid.class);
+
+        // Fabric API
+        addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
 
         if (!isServerOnly) {
             try {
