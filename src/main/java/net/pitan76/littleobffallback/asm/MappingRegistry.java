@@ -2,7 +2,6 @@ package net.pitan76.littleobffallback.asm;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.components.AbstractTextAreaWidget;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -20,6 +19,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -28,7 +29,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.CompilableString;
 import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -58,7 +58,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.swing.text.html.parser.TagElement;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -193,7 +192,8 @@ public class MappingRegistry {
         addClass("net/minecraft/class_3414", SoundEvent.class);
         addClass("net/minecraft/class_2400", SimpleParticleType.class); // DefaultParticleType
         addClass("net/minecraft/class_5348", FormattedText.class); // StringVisitable
-        addClass("net/minecraft/class_2520", TagElement.class); // NbtElement
+        addClass("net/minecraft/class_2520", Tag.class); // NbtElement
+        addClass("net/minecraft/class_2499", ListTag.class); // NbtList
 
         // Fabric API
         addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
