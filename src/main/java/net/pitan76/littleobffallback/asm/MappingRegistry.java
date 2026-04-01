@@ -1,5 +1,6 @@
 package net.pitan76.littleobffallback.asm;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -142,9 +143,6 @@ public class MappingRegistry {
         addClass("net/minecraft/class_265", VoxelShape.class);
         addClass("net/minecraft/class_259", Shapes.class);
         addClass("net/minecraft/class_2540", FriendlyByteBuf.class);
-        addClass("net/minecraft/class_437", Screen.class);
-        addClass("net/minecraft/class_364", GuiEventListener.class);
-        addClass("net/minecraft/class_827", BlockEntityRenderer.class);
         addClass("net/minecraft/class_1263", Container.class);
         addClass("net/minecraft/class_1661", Inventory.class);
         addClass("net/minecraft/class_1735", Slot.class);
@@ -152,11 +150,20 @@ public class MappingRegistry {
         addClass("net/minecraft/class_5250", MutableComponent.class);
         addClass("net/minecraft/class_2371", NonNullList.class);
         addClass("net/minecraft/class_1277", SimpleContainer.class);
-        addClass("net/minecraft/class_327", Font.class);
         addClass("net/minecraft/class_3908", MenuProvider.class);
         addClass("net/minecraft/class_3917", MenuType.class);
         addClass("net/minecraft/class_1935", ItemLike.class);
         addClass("net/minecraft/class_2769", Property.class);
+
+        try {
+            addClass("net/minecraft/class_310", Minecraft.class);
+            addClass("net/minecraft/class_327", Font.class);
+            addClass("net/minecraft/class_437", Screen.class);
+            addClass("net/minecraft/class_364", GuiEventListener.class);
+            addClass("net/minecraft/class_827", BlockEntityRenderer.class);
+        } catch (Exception _) {
+            // クライアントでない場合は無視する
+        }
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
