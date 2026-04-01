@@ -33,6 +33,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -204,6 +205,8 @@ public class MappingRegistry {
         addClass("net/minecraft/class_239$class_240", HitResult.Type.class); // HitResult$Type
         addClass("net/minecraft/class_4185", Button.class); // ButtonWidget
         addClass("net/minecraft/class_4185$class_4241", Button.OnPress.class); // ButtonWidget.PressAction
+        addClass("net/minecraft/class_1311", MobCategory.class); // SpawnGroup
+        addClass("net/minecraft/class_1278", WorldlyContainer.class); // SidedInventory
 
         // Fabric API
         addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
