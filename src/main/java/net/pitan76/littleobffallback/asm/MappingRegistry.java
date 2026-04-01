@@ -39,6 +39,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -159,9 +160,10 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2769", Property.class);
         addClass("net/minecraft/class_3222", ServerPlayer.class);
         addClass("net/minecraft/class_2189", AirBlock.class);
-        addClass("net/minecraft/class_2404", LiquidBlock.class);
+        addClass("net/minecraft/class_2404", LiquidBlock.class); // FluidBlock
         addClass("net/minecraft/class_2487", CompoundTag.class);
-        addClass("net/minecraft/class_1301", EntitySelector.class);
+        addClass("net/minecraft/class_1301", EntitySelector.class); // EntityPredicates
+        addClass("net/minecraft/class_238", AABB.class); // Box
 
         if (!isServerOnly) {
             try {
