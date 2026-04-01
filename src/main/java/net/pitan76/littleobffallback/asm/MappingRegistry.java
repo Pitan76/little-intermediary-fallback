@@ -51,6 +51,8 @@ public class MappingRegistry {
     public static final Map<String, String> FIELD_MAP = new ConcurrentHashMap<>();
     public static final Map<String, String> METHOD_MAP = new ConcurrentHashMap<>();
 
+    public static boolean isServerOnly = false;
+
     /**
      * クラスのマッピングを追加する
      * @param intermediary 元の難読化クラス名 (例: net.minecraft.class_1297 または net/minecraft/class_1297)
@@ -155,14 +157,17 @@ public class MappingRegistry {
         addClass("net/minecraft/class_1935", ItemLike.class);
         addClass("net/minecraft/class_2769", Property.class);
 
-        try {
-            addClass("net/minecraft/class_310", Minecraft.class);
-            addClass("net/minecraft/class_327", Font.class);
-            addClass("net/minecraft/class_437", Screen.class);
-            addClass("net/minecraft/class_364", GuiEventListener.class);
-            addClass("net/minecraft/class_827", BlockEntityRenderer.class);
-        } catch (Exception _) {
-            // クライアントでない場合は無視する
+        if (!isServerOnly) {
+            try {
+                addClass("net/minecraft/class_310", Minecraft.class);
+                addClass("net/minecraft/class_327", Font.class);
+                addClass("net/minecraft/class_437", Screen.class);
+                addClass("net/minecraft/class_364", GuiEventListener.class);
+                addClass("net/minecraft/class_827", BlockEntityRenderer.class);
+            } catch (Exception _) {
+                // クライアントでない場合は次から無視する
+                isServerOnly = true;
+            }
         }
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
