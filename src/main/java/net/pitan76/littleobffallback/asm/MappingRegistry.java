@@ -228,6 +228,14 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2248", "method_9518", "getName");
         addMethod("net/minecraft/class_2248", "method_9564", "defaultBlockState");
 
+        // BlockBehaviour
+        addMethod("net/minecraft/class_4970", "method_8389", "asItem");
+        addMethod("net/minecraft/class_4970", "method_26160", "asBlock");
+        addMethod("net/minecraft/class_4970", "method_36555", "defaultDestroyTime");
+
+        // Direction
+        addMethod("net/minecraft/class_2350", "method_10153", "getOpposite");
+
         // Items
         addField("net/minecraft/class_2246", "field_10124", "AIR");
         addField("net/minecraft/class_2246", "field_10340", "STONE");
