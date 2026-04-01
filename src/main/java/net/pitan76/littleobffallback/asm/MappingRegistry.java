@@ -414,9 +414,16 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2338", "method_35852", "subtract");
         addMethod("net/minecraft/class_2338", "method_35862", "multiply");
 
-        // I18n
-        addMethod("net/minecraft/class_1074", "method_4662", "get"); // translate
-        addMethod("net/minecraft/class_1074", "method_4663", "exists"); // hasTranslation
+        if (!isServerOnly) {
+            try {
+                // I18n
+                addMethod("net/minecraft/class_1074", "method_4662", "get"); // translate
+                addMethod("net/minecraft/class_1074", "method_4663", "exists"); // hasTranslation
+            } catch (Exception _) {
+                // クライアントでない場合は次から無視する
+                isServerOnly = true;
+            }
+        }
 
         // FluidState
         addMethod("net/minecraft/class_3610", "method_15772", "getType"); // getFluid
@@ -424,6 +431,7 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_3610", "method_15771", "isSource"); // isStill
 
         // AbstractContainerMenu (ScreenHandler)
+        addMethod("net/minecraft/class_1703", "method_34254", "setCarried"); // setCursorStack
         addMethod("net/minecraft/class_1703", "method_34255", "getCarried"); // getCursorStack
 
         // EntitySelector
