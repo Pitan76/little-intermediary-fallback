@@ -196,6 +196,16 @@ public class MappingRegistry {
 
         // ItemStack
         addMethod("net/minecraft/class_1799", "method_7960", "isEmpty");
+        addMethod("net/minecraft/class_1799", "method_7909", "getItem");
+        addMethod("net/minecraft/class_1799", "method_7947", "getCount");
+        addMethod("net/minecraft/class_1799", "method_7914", "getMaxStackSize");
+        addMethod("net/minecraft/class_1799", "method_7936", "getMaxDamage");
+        addMethod("net/minecraft/class_1799", "method_7964", "getDisplayName");
+        addMethod("net/minecraft/class_1799", "method_7919", "getDamageValue");
+        addMethod("net/minecraft/class_1799", "method_7933", "grow");
+        addMethod("net/minecraft/class_1799", "method_7934", "shrink");
+        addMethod("net/minecraft/class_1799", "method_7939", "setCount");
+        addMethod("net/minecraft/class_1799", "method_7974", "setDamageValue");
 
         // Items
         addField("net/minecraft/class_2246", "field_10124", "AIR");

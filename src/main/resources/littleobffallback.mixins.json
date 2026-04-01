@@ -13,9 +13,7 @@
     "EntityMixin",
     "EntityTypeMixin",
     "ItemMixin",
-    "ItemStackMixin",
     "LevelMixin",
-    "LivingEntityMixin",
     "MenuProviderMixin",
     "PropertyMixin",
     "Vec3iMixin"
