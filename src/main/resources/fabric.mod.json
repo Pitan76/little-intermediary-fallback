@@ -27,8 +27,7 @@
   ],
   "accessWidener": "littleobffallback.accesswidener",
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric-api": "*",
-    "minecraft": "${minecraft_version}"
+    "fabricloader": "*",
+    "minecraft": "*"
   }
 }
