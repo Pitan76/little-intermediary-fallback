@@ -516,5 +516,15 @@ public class MappingRegistry {
         addField("net/minecraft/class_2350", "field_11034", "EAST");
 
         addField("net/minecraft/class_1661", "field_7546", "player");
+
+        // MobCategory (SpawnGroup)
+        addField("net/minecraft/class_1311", "field_6302", "MONSTER");
+        addField("net/minecraft/class_1311", "field_6294", "CREATURE");
+        addField("net/minecraft/class_1311", "field_6303", "AMBIENT");
+        addField("net/minecraft/class_1311", "field_34447", "AXOLOTLS");
+        addField("net/minecraft/class_1311", "field_30092", "UNDERGROUND_WATER_CREATURE");
+        addField("net/minecraft/class_1311", "field_6300", "WATER_CREATURE");
+        addField("net/minecraft/class_1311", "field_24460", "WATER_AMBIENT");
+        addField("net/minecraft/class_1311", "field_17715", "MISC");
     }
 }
