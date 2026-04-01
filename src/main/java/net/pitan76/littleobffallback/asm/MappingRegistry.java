@@ -317,6 +317,14 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2338", "method_10072", "south");
         addMethod("net/minecraft/class_2338", "method_10078", "east");
         addMethod("net/minecraft/class_2338", "method_10067", "west");
+
+        addMethod("net/minecraft/class_2338", "method_10086", "above"); // up(int distance)
+        addMethod("net/minecraft/class_2338", "method_10087", "below"); // down(int distance)
+        addMethod("net/minecraft/class_2338", "method_10076", "north");
+        addMethod("net/minecraft/class_2338", "method_10077", "south");
+        addMethod("net/minecraft/class_2338", "method_10089", "east");
+        addMethod("net/minecraft/class_2338", "method_10088", "west");
+
         addMethod("net/minecraft/class_2338", "method_10069", "offset"); // add
         addMethod("net/minecraft/class_2338", "method_10081", "offset"); // add
         addMethod("net/minecraft/class_2338", "method_10059", "subtract");
