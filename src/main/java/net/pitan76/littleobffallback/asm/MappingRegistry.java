@@ -58,6 +58,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.swing.text.html.parser.TagElement;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -192,6 +193,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_3414", SoundEvent.class);
         addClass("net/minecraft/class_2400", SimpleParticleType.class); // DefaultParticleType
         addClass("net/minecraft/class_5348", FormattedText.class); // StringVisitable
+        addClass("net/minecraft/class_2520", TagElement.class); // NbtElement
 
         // Fabric API
         addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
