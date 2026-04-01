@@ -295,6 +295,8 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2338", "method_10263", "getX");
         addMethod("net/minecraft/class_2338", "method_10264", "getY");
         addMethod("net/minecraft/class_2338", "method_10260", "getZ");
+        addMethod("net/minecraft/class_2338", "method_10093", "relative");
+        addMethod("net/minecraft/class_2338", "method_10079", "relative");
         addMethod("net/minecraft/class_2338", "method_30931", "above");
         addMethod("net/minecraft/class_2338", "method_23228", "below");
         addMethod("net/minecraft/class_2338", "method_35861", "north");
