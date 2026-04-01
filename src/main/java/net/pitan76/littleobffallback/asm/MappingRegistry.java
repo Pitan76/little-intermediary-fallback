@@ -13,8 +13,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -27,6 +29,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -36,6 +39,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -111,6 +115,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_1309", LivingEntity.class);
         addClass("net/minecraft/class_1657", Player.class);
         addClass("net/minecraft/class_1297", Entity.class);
+        addClass("net/minecraft/class_1299", EntityType.class);
         addClass("net/minecraft/class_1542", ItemEntity.class);
         addClass("net/minecraft/class_1303", ExperienceOrb.class);
         addClass("net/minecraft/class_2248", Block.class);
@@ -150,6 +155,10 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2371", NonNullList.class);
         addClass("net/minecraft/class_1277", SimpleContainer.class);
         addClass("net/minecraft/class_327", Font.class);
+        addClass("net/minecraft/class_3908", MenuProvider.class);
+        addClass("net/minecraft/class_3917", MenuType.class);
+        addClass("net/minecraft/class_1935", ItemLike.class);
+        addClass("net/minecraft/class_2769", Property.class);
 
         addMethod("net/minecraft/class_1799", "method_7909", "getItem");
         addMethod("net/minecraft/class_1792", "method_7854", "getDefaultInstance");
@@ -248,6 +257,9 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_4970", "method_26160", "asBlock");
         addMethod("net/minecraft/class_4970", "method_36555", "defaultDestroyTime");
 
+        // ItemLike
+        addMethod("net/minecraft/class_1935", "method_8389", "asItem");
+
         // Direction
         addMethod("net/minecraft/class_2350", "method_10153", "getOpposite");
 
@@ -255,6 +267,13 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2382", "method_10263", "getX");
         addMethod("net/minecraft/class_2382", "method_10264", "getY");
         addMethod("net/minecraft/class_2382", "method_10260", "getZ");
+
+        // Level (World)
+        addMethod("net/minecraft/class_1937", "method_8608", "isClientSide");
+        addMethod("net/minecraft/class_1937", "method_8321", "getBlockEntity");
+        addMethod("net/minecraft/class_1937", "method_8320", "getBlockState");
+        addMethod("net/minecraft/class_1937", "method_8501", "setBlock");
+        addMethod("net/minecraft/class_1937", "method_8652", "setBlock");
 
         // BlockPos
         addMethod("net/minecraft/class_2338", "method_10263", "getX");

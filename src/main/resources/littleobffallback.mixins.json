@@ -5,11 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "EntityMixin",
-    "EntityTypeMixin",
-    "ItemMixin",
-    "LevelMixin",
-    "MenuProviderMixin",
-    "PropertyMixin"
+    "ItemMixin"
   ],
   "client": [
   ],
