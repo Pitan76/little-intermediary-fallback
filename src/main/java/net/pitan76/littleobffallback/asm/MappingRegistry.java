@@ -236,6 +236,13 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2248", "method_9518", "getName");
         addMethod("net/minecraft/class_2248", "method_9564", "defaultBlockState");
 
+        // BlockState
+        addMethod("net/minecraft/class_2680", "method_26204", "getBlock");
+        addMethod("net/minecraft/class_2680", "method_26227", "getFluidState");
+        addMethod("net/minecraft/class_2680", "method_11654", "getValue");
+        addMethod("net/minecraft/class_2680", "method_11657", "setValue");
+        addMethod("net/minecraft/class_2680", "method_28498", "hasProperty");
+
         // BlockBehaviour
         addMethod("net/minecraft/class_4970", "method_8389", "asItem");
         addMethod("net/minecraft/class_4970", "method_26160", "asBlock");
