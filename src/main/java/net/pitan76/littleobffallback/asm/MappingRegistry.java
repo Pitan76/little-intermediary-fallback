@@ -385,6 +385,17 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2680", "method_11657", "setValue");
         addMethod("net/minecraft/class_2680", "method_28498", "hasProperty");
 
+        // Half (BlockHalf)
+        addMethod("net/minecraft/class_2760", "field_12619", "TOP");
+        addMethod("net/minecraft/class_2760", "field_12617", "BOTTOM");
+
+        // StairsShape (StairShape)
+        addMethod("net/minecraft/class_2778", "field_12710", "STRAIGHT");
+        addMethod("net/minecraft/class_2778", "field_12712", "INNER_LEFT");
+        addMethod("net/minecraft/class_2778", "field_12713", "INNER_RIGHT");
+        addMethod("net/minecraft/class_2778", "field_12708", "OUTER_LEFT");
+        addMethod("net/minecraft/class_2778", "field_12709", "OUTER_RIGHT");
+
         // BlockBehaviour
         addMethod("net/minecraft/class_4970", "method_8389", "asItem");
         addMethod("net/minecraft/class_4970", "method_26160", "asBlock");
