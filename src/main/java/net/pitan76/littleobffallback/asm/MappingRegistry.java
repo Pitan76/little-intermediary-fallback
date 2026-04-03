@@ -388,6 +388,11 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2382", "method_10264", "getY");
         addMethod("net/minecraft/class_2382", "method_10260", "getZ");
 
+        // Vec3d
+        addMethod("net/minecraft/class_243", "method_10216", "getX");
+        addMethod("net/minecraft/class_243", "method_10214", "getY");
+        addMethod("net/minecraft/class_243", "method_10215", "getZ");
+
         // Level (World)
         addMethod("net/minecraft/class_1937", "method_8608", "isClientSide");
         addMethod("net/minecraft/class_1937", "method_8321", "getBlockEntity");
