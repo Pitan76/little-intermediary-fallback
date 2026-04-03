@@ -547,5 +547,9 @@ public class MappingRegistry {
         addField("net/minecraft/class_1311", "field_6300", "WATER_CREATURE");
         addField("net/minecraft/class_1311", "field_24460", "WATER_AMBIENT");
         addField("net/minecraft/class_1311", "field_17715", "MISC");
+
+        // InteractionHand (Hand)
+        addField("net/minecraft/class_1268", "field_5808", "MAIN_HAND");
+        addField("net/minecraft/class_1268", "field_5810", "OFF_HAND");
     }
 }
