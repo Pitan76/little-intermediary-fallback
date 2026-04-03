@@ -43,10 +43,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -213,6 +210,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_1278", WorldlyContainer.class); // SidedInventory
         addClass("net/minecraft/class_2392", ParticleType.class); // ItemStackParticleEffect (ParticleType<ItemParticleOption>)
         addClass("net/minecraft/class_1268", InteractionHand.class); // Hand
+        addClass("net/minecraft/class_1923", ChunkPos.class); // Hand
 
         // Fabric API
         addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
