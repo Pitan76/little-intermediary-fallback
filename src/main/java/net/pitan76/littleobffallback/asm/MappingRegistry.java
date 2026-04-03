@@ -402,6 +402,9 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_1937", "method_8316", "getFluidState");
         addMethod("net/minecraft/class_1937", "method_8503", "getServer");
 
+        // ServerLevel (ServerWorld)
+        addMethod("net/minecraft/class_3218", "method_8503", "getServer");
+
         // BlockPos
         addMethod("net/minecraft/class_2338", "method_10263", "getX");
         addMethod("net/minecraft/class_2338", "method_10264", "getY");
