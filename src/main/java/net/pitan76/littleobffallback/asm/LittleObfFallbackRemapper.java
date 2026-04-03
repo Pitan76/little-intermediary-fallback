@@ -7,7 +7,9 @@ import org.objectweb.asm.commons.Remapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LittleObfFallbackRemapper extends Remapper {
 
@@ -62,7 +64,7 @@ public class LittleObfFallbackRemapper extends Remapper {
                 return mapped;
             }
 
-            // 継承関係も適用してみる
+            // 親クラスのメソッドもチェック
             String superClass = getSuperClass(owner);
             if (superClass != null) {
                 String mappedFromSuper = mapMethodName(superClass, name, descriptor);
@@ -84,28 +86,33 @@ public class LittleObfFallbackRemapper extends Remapper {
         return super.mapMethodName(owner, name, descriptor);
     }
 
+    private final ConcurrentHashMap<String, String> superClassCache = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, String[]> interfaceCache = new ConcurrentHashMap<>();
+
     private String getSuperClass(String className) {
-        try {
-            ClassReader classReader = new ClassReader(className);
-            SuperClassVisitor visitor = new SuperClassVisitor();
-            classReader.accept(visitor, 0);
-            return visitor.getSuperClassName();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return superClassCache.computeIfAbsent(className, key -> {
+            try {
+                ClassReader classReader = new ClassReader(key);
+                SuperClassVisitor visitor = new SuperClassVisitor();
+                classReader.accept(visitor, 0);
+                return visitor.getSuperClassName();
+            } catch (IOException e) {
+                return null;
+            }
+        });
     }
 
     private String[] getInterfaces(String className) {
-        try {
-            ClassReader classReader = new ClassReader(className);
-            InterfaceVisitor visitor = new InterfaceVisitor();
-            classReader.accept(visitor, 0);
-            return visitor.getInterfaces();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return interfaceCache.computeIfAbsent(className, key -> {
+            try {
+                ClassReader classReader = new ClassReader(key);
+                InterfaceVisitor visitor = new InterfaceVisitor();
+                classReader.accept(visitor, 0);
+                return visitor.getInterfaces();
+            } catch (IOException e) {
+                return null;
+            }
+        });
     }
 
     // 親クラスを取得するための ClassVisitor
@@ -137,9 +144,7 @@ public class LittleObfFallbackRemapper extends Remapper {
         @Override
         public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
             if (interfaces != null) {
-                for (String iface : interfaces) {
-                    this.interfaces.add(iface);
-                }
+                this.interfaces.addAll(Arrays.asList(interfaces));
             }
         }
 
