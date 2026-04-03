@@ -17,6 +17,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
@@ -218,7 +220,8 @@ public class MappingRegistry {
         addClass("net/minecraft/class_4185$class_4241", Button.OnPress.class); // ButtonWidget.PressAction
         addClass("net/minecraft/class_1311", MobCategory.class); // SpawnGroup
         addClass("net/minecraft/class_1278", WorldlyContainer.class); // SidedInventory
-        addClass("net/minecraft/class_2392", ParticleType.class); // ItemStackParticleEffect (ParticleType<ItemParticleOption>)
+        addClass("net/minecraft/class_2394", ParticleOptions.class); // ItemStackParticleEffect (ParticleOptions/ItemParticleOption)
+        addClass("net/minecraft/class_2392", ItemParticleOption.class); // ItemStackParticleEffect (ParticleOptions/ItemParticleOption)
         addClass("net/minecraft/class_1268", InteractionHand.class); // Hand
         addClass("net/minecraft/class_1923", ChunkPos.class); // Hand
         addClass("net/minecraft/class_5568", EntityAccess.class); // EntityLike
