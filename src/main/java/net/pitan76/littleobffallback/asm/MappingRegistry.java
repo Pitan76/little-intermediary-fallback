@@ -256,8 +256,6 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_259", "method_1073", "empty");
         addMethod("net/minecraft/class_259", "method_1077", "block");
         addMethod("net/minecraft/class_259", "box", "cuboid");
-        addMethod("net/minecraft/class_1297", "method_5735", "getDirection");
-        addMethod("net/minecraft/class_1309", "method_5735", "getDirection");
         addMethod("net/minecraft/class_1735", "method_53512", "set");
         addMethod("net/minecraft/class_1735", "method_7677", "getItem");
         addMethod("net/minecraft/class_1735", "method_7680", "mayPlace");
@@ -368,10 +366,12 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_1297", "method_23317", "getX");
         addMethod("net/minecraft/class_1297", "method_23318", "getY");
         addMethod("net/minecraft/class_1297", "method_23321", "getZ");
+        addMethod("net/minecraft/class_1297", "method_5735", "getDirection");
 
 
         // LivingEntity
         addMethod("net/minecraft/class_1309", "method_5805", "isAlive");
+        addMethod("net/minecraft/class_1309", "method_5735", "getDirection");
 
         // BlockEntity
         addMethod("net/minecraft/class_2586", "method_11017", "getType");
