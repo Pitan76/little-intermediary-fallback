@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class LittleObfFallbackRemapper extends Remapper {
@@ -89,29 +90,42 @@ public class LittleObfFallbackRemapper extends Remapper {
     private final ConcurrentHashMap<String, String> superClassCache = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, String[]> interfaceCache = new ConcurrentHashMap<>();
 
+    private final Map<String, byte[]> classMap = new ConcurrentHashMap<>();
+
     private String getSuperClass(String className) {
         return superClassCache.computeIfAbsent(className, key -> {
-            try {
-                ClassReader classReader = new ClassReader(key);
-                SuperClassVisitor visitor = new SuperClassVisitor();
-                classReader.accept(visitor, 0);
-                return visitor.getSuperClassName();
-            } catch (IOException e) {
-                return null;
-            }
+            byte[] classBytes = classMap.get(key);
+            if (classBytes == null) return null;
+
+            ClassReader classReader = new ClassReader(classBytes);
+            SuperClassVisitor visitor = new SuperClassVisitor();
+            classReader.accept(visitor, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+            return visitor.getSuperClassName();
         });
     }
 
+//    private String getSuperClass(String className) {
+//        return superClassCache.computeIfAbsent(className, key -> {
+//            try {
+//                ClassReader classReader = new ClassReader(key);
+//                SuperClassVisitor visitor = new SuperClassVisitor();
+//                classReader.accept(visitor, 0);
+//                return visitor.getSuperClassName();
+//            } catch (IOException e) {
+//                return null;
+//            }
+//        });
+//    }
+
     private String[] getInterfaces(String className) {
         return interfaceCache.computeIfAbsent(className, key -> {
-            try {
-                ClassReader classReader = new ClassReader(key);
-                InterfaceVisitor visitor = new InterfaceVisitor();
-                classReader.accept(visitor, 0);
-                return visitor.getInterfaces();
-            } catch (IOException e) {
-                return null;
-            }
+            byte[] classBytes = classMap.get(key);
+            if (classBytes == null) return null;
+
+            ClassReader classReader = new ClassReader(classBytes);
+            InterfaceVisitor visitor = new InterfaceVisitor();
+            classReader.accept(visitor, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+            return visitor.getInterfaces();
         });
     }
 
