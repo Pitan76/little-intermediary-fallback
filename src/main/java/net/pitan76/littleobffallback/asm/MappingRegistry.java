@@ -533,6 +533,8 @@ public class MappingRegistry {
         // AbstractContainerMenu (ScreenHandler)
         addMethod("net/minecraft/class_1703", "method_34254", "setCarried"); // setCursorStack
         addMethod("net/minecraft/class_1703", "method_34255", "getCarried"); // getCursorStack
+        addMethod("net/minecraft/class_1703", "method_7613", "canTakeItemForPickAll"); // canInsertIntoSlot
+        addMethod("net/minecraft/class_1703", "method_7615", "canDragTo"); // canInsertIntoSlot
 
         // ChunkPos
         addMethod("net/minecraft/class_1923", "net/minecraft/class_2338#<init>(III)V", "containing");
