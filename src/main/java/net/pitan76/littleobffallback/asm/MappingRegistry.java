@@ -32,6 +32,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.StatType;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.*;
@@ -229,9 +231,9 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2778", StairsShape.class); // StairsShape (StairShape)
         addClass("net/minecraft/class_3468", Stats.class); // Stats
         addClass("net/minecraft/class_3448", StatType.class); // StatType
-
-
-
+        addClass("net/minecraft/class_3419", SoundSource.class); // SoundCategory
+        addClass("net/minecraft/class_3414", SoundEvent.class); // SoundEvent
+        addClass("net/minecraft/class_3417", SoundEvents.class); // SoundEvents
 
         // Fabric API
         addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
@@ -615,5 +617,23 @@ public class MappingRegistry {
         addField("net/minecraft/class_3468", "field_15383", "ITEM_BROKEN");
         addField("net/minecraft/class_3468", "field_15392", "ITEM_PICKED_UP");
         addField("net/minecraft/class_3468", "field_15405", "ITEM_DROPPED");
+
+        // SoundCategory
+        addField("net/minecraft/class_3419", "field_15250", "MASTER");
+        addField("net/minecraft/class_3419", "field_15253", "MUSIC");
+        addField("net/minecraft/class_3419", "field_15247", "RECORDS");
+        addField("net/minecraft/class_3419", "field_15252", "WEATHER");
+        addField("net/minecraft/class_3419", "field_15245", "BLOCKS");
+        addField("net/minecraft/class_3419", "field_15251", "HOSTILE");
+        addField("net/minecraft/class_3419", "field_15254", "NEUTRAL");
+        addField("net/minecraft/class_3419", "field_15248", "PLAYERS");
+        addField("net/minecraft/class_3419", "field_15256", "AMBIENT");
+        addField("net/minecraft/class_3419", "field_15246", "VOICE");
+
+        // SoundEvents
+        addField("net/minecraft/class_3417", "field_14562", "ENTITY_ZOMBIE_ATTACK_WOODEN_DOOR");
+        addField("net/minecraft/class_3417", "field_14670", "ENTITY_ZOMBIE_ATTACK_IRON_DOOR");
+        addField("net/minecraft/class_3417", "field_14742", "ENTITY_ZOMBIE_BREAK_WOODEN_DOOR");
+        addField("net/minecraft/class_3417", "field_14727", "BLOCK_ANVIL_FALL");
     }
 }
