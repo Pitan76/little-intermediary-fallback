@@ -539,6 +539,9 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_1923", "net/minecraft/class_2338#<init>(III)V", "containing");
         addMethod("net/minecraft/class_1923", "net/minecraft/core/BlockPos#<init>(III)V", "containing");
 
+        // ExperienceOrbEntity (ExperienceOrb)
+        addMethod("net/minecraft/class_1303", "method_5919", "getValue");
+
         // EntitySelector
         addField("net/minecraft/class_1301", "field_6154", "ENTITY_STILL_ALIVE");
         addField("net/minecraft/class_1301", "field_6157", "ENTITY_STILL_ALIVE");
