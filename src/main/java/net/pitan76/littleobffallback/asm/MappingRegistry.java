@@ -35,6 +35,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.StatType;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -248,6 +249,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_1869", ShapedRecipe.class); // ShapedRecipe
         addClass("net/minecraft/class_1867", ShapelessRecipe.class); // ShapelessRecipe
         addClass("net/minecraft/class_1856", Ingredient.class); // Ingredient
+        addClass("net/minecraft/class_3532", Mth.class);
 
         // Fabric API
         addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
@@ -406,6 +408,8 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_1297", "method_23321", "getZ");
         addMethod("net/minecraft/class_1297", "method_5735", "getDirection");
 
+        // MathHelper (Mth)
+        addMethod("net/minecraft/class_3532", "method_15369", "hsvToRgb");
 
         // LivingEntity
         addMethod("net/minecraft/class_1309", "method_5805", "isAlive");
@@ -542,9 +546,17 @@ public class MappingRegistry {
         // ExperienceOrbEntity (ExperienceOrb)
         addMethod("net/minecraft/class_1303", "method_5919", "getValue");
 
+        // AbstractWidget (ClickableWidget)
+        addMethod("net/minecraft/class_339", "method_25367", "isHovered");
+        addMethod("net/minecraft/class_339", "method_25370", "isFocused");
+
         // EntitySelector
         addField("net/minecraft/class_1301", "field_6154", "ENTITY_STILL_ALIVE");
         addField("net/minecraft/class_1301", "field_6157", "ENTITY_STILL_ALIVE");
+
+        // AbstractWidget (ClickableWidget)
+        addField("net/minecraft/class_339", "field_22763", "active");
+        addField("net/minecraft/class_339", "field_22764", "visible");
 
         // Items
         addField("net/minecraft/class_1802", "field_10124", "AIR");
