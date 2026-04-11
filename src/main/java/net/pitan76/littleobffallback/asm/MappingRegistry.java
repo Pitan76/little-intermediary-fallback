@@ -38,7 +38,11 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -148,6 +152,10 @@ public class MappingRegistry {
     static {
         addClass("net/minecraft/class_2960", Identifier.class);
         addClass("net/minecraft/class_1309", LivingEntity.class);
+        addClass("net/minecraft/class_1429", Animal.class); // AnimalEntity
+        addClass("net/minecraft/class_1571", Ghast.class); // GhastEntity
+        addClass("net/minecraft/class_1593", Phantom.class); // PhantomEntity
+        addClass("net/minecraft/class_1569", Enemy.class); // Monster
         addClass("net/minecraft/class_1676", Projectile.class);
         addClass("net/minecraft/class_1682", ThrowableProjectile.class);
         addClass("net/minecraft/class_3857", ThrowableItemProjectile.class);
@@ -569,6 +577,8 @@ public class MappingRegistry {
         addField("net/minecraft/class_1802", "field_8342", "BRICK_SLAB");
         addField("net/minecraft/class_1802", "field_8280", "GLASS");
         addField("net/minecraft/class_1802", "field_8705", "WATER_BUCKET");
+        addField("net/minecraft/class_1802", "field_8529", "BOOK");
+        addField("net/minecraft/class_1802", "field_8598", "ENCHANTED_BOOK");
 
         // Blocks
         addField("net/minecraft/class_2246", "field_8162", "AIR");
