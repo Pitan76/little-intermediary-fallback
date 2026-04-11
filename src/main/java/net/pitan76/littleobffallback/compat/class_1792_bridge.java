@@ -5,11 +5,11 @@ import net.minecraft.world.item.Item;
 
 // Item
 public interface class_1792_bridge {
-    default Item asItem() {
+    default Item littleobffallback$asItem() {
         return (Item) this;
     }
 
     default Component method_63680() {
-        return asItem().getName(asItem().getDefaultInstance());
+        return littleobffallback$asItem().getName(littleobffallback$asItem().getDefaultInstance());
     }
 }

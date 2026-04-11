@@ -6,19 +6,19 @@ import net.minecraft.world.phys.Vec3;
 
 // Entity
 public interface class_1297_bridge {
-    default Entity asEntity() {
+    default Entity littleobffallback$asEntity() {
         return (Entity) this;
     }
 
     default Level getWorld() {
-        return asEntity().level();
+        return littleobffallback$asEntity().level();
     }
 
     default Level getEntityWorld() {
-        return asEntity().level();
+        return littleobffallback$asEntity().level();
     }
 
     default Vec3 getPos() {
-        return asEntity().position();
+        return littleobffallback$asEntity().position();
     }
 }
