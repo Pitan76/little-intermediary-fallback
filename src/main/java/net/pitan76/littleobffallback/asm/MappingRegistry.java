@@ -246,6 +246,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2503", LongTag.class); // NbtLong
         addClass("net/minecraft/class_2494", FloatTag.class); // NbtFloat
         addClass("net/minecraft/class_2481", ByteTag.class); // NbtByte
+        addClass("net/minecraft/class_1304", EquipmentSlot.class); // NbtShort
 
         addClass("net/minecraft/class_26", SavedDataStorage.class); // PersistentStateManager
         addClass("net/minecraft/class_18", SavedData.class); // PersistentState
@@ -328,6 +329,9 @@ public class MappingRegistry {
         addMethod("net/minecraft/class_2487", "method_10580", "get");
         addMethod("net/minecraft/class_2487", "method_10545", "contains");
         addMethod("net/minecraft/class_2487", "method_10562", "getCompoundOrEmpty");
+
+        // VoxelShapes (Shapes)
+        addMethod("net/minecraft/class_259", "method_1081", "create");
 
         // Container (Inventory)
         addMethod("net/minecraft/class_1263", "method_5439", "getContainerSize");
