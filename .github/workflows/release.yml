@@ -37,3 +37,22 @@ jobs:
           body: |
             ${{ github.event.head_commit.message }}
           generate_release_notes: true
+
+      - name: Register to ModParks
+        env:
+          MODPARKS_URL: https://modparks.pitan76.net
+          PROJECT_SLUG: little-intermediary-fallback
+          VERSION_NUMBER: ${{ github.ref_name }}
+        run: |
+          FILE_NAME=$(basename build/libs/*.jar)
+          FILE_URL="https://github.com/${{ github.repository }}/releases/download/${VERSION_NUMBER}/${FILE_NAME}"
+          
+          curl -X POST "$MODPARKS_URL/api/v1/projects/$PROJECT_SLUG/versions" \
+            -H "Authorization: Bearer ${{ secrets.MODPARKS_API_KEY }}" \
+            -F "versionNumber=$VERSION_NUMBER" \
+            -F "mcVersions=26.1" \
+            -F "mcVersions=26.1.1" \
+            -F "mcVersions=26.1.2" \
+            -F "loaders=fabric" \
+            -F "changelog=${{ github.event.head_commit.message }}" \
+            -F "fileUrl=$FILE_URL"
