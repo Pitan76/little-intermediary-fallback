@@ -28,12 +28,14 @@ jobs:
           PROJECT_SLUG: "little-intermediary-fallback"
         run: |
           TAG="${{ steps.release.outputs.tag }}"
+          VERSION="${TAG#v}"
+          
           FILE_NAME="${{ steps.release.outputs.name }}"
           FILE_URL="https://github.com/${{ github.repository }}/releases/download/${TAG}/${FILE_NAME}"
-
+          
           curl -X POST "$MODPARKS_URL/api/v1/projects/$PROJECT_SLUG/versions" \
             -H "Authorization: Bearer ${{ secrets.MODPARKS_API_KEY }}" \
-            -F "versionNumber=$TAG" \
+            -F "versionNumber=$VERSION" \
             -F "mcVersions=26.1" \
             -F "mcVersions=26.1.1" \
             -F "mcVersions=26.1.2" \
