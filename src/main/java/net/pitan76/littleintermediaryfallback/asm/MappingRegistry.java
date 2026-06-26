@@ -247,13 +247,10 @@ public class MappingRegistry {
         addClass("net/minecraft/class_2494", FloatTag.class); // NbtFloat
         addClass("net/minecraft/class_2481", ByteTag.class); // NbtByte
         addClass("net/minecraft/class_1304", EquipmentSlot.class); // NbtShort
-
         addClass("net/minecraft/class_26", SavedDataStorage.class); // PersistentStateManager
         addClass("net/minecraft/class_18", SavedData.class); // PersistentState
         addClass("net/minecraft/class_239", HitResult.class); // HitResult
         addClass("net/minecraft/class_239$class_240", HitResult.Type.class); // HitResult$Type
-        addClass("net/minecraft/class_4185", Button.class); // ButtonWidget
-        addClass("net/minecraft/class_4185$class_4241", Button.OnPress.class); // ButtonWidget.PressAction
         addClass("net/minecraft/class_1311", MobCategory.class); // SpawnGroup
         addClass("net/minecraft/class_1278", WorldlyContainer.class); // SidedInventory
         addClass("net/minecraft/class_2394", ParticleOptions.class); // ItemStackParticleEffect (ParticleOptions/ItemParticleOption)
@@ -286,6 +283,8 @@ public class MappingRegistry {
 
         if (!isServerOnly) {
             try {
+                addClass("net/minecraft/class_4185", Button.class); // ButtonWidget
+                addClass("net/minecraft/class_4185$class_4241", Button.OnPress.class); // ButtonWidget.PressAction
                 addClass("net/minecraft/class_310", Minecraft.class); // MinecraftClient
                 addClass("net/minecraft/class_327", Font.class); // TextRenderer
                 addClass("net/minecraft/class_437", Screen.class);
@@ -296,7 +295,7 @@ public class MappingRegistry {
                 addClass("net/minecraft/class_1074", I18n.class);
                 addClass("net/minecraft/class_342", EditBox.class); // TextFieldWidget
                 addClass("net/minecraft/class_339", AbstractWidget.class); // ClickableWidget
-            } catch (Exception _) {
+            } catch (Throwable _) {
                 // クライアントでない場合は次から無視する
                 isServerOnly = true;
             }
