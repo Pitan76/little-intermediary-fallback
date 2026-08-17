@@ -66,6 +66,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -231,6 +232,7 @@ public class MappingRegistry {
         addClass("net/minecraft/class_3917", MenuType.class); // ScreenHandlerType
         addClass("net/minecraft/class_1935", ItemLike.class); // ItemConvertible
         addClass("net/minecraft/class_2769", Property.class);
+        addClass("net/minecraft/class_2746", BooleanProperty.class);
         addClass("net/minecraft/class_3222", ServerPlayer.class); // ServerPlayerEntity
         addClass("net/minecraft/class_2189", AirBlock.class);
         addClass("net/minecraft/class_2404", LiquidBlock.class); // FluidBlock
