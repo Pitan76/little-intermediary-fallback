@@ -296,6 +296,12 @@ public class MappingRegistry {
         // Fabric API
         addClass("net/fabricmc/fabric/api/transfer/v1/item/InventoryStorage", "net/fabricmc/fabric/api/transfer/v1/item/ContainerStorage"); // InventoryStorage
 
+        // Architectury API
+        // MCPitanLibがarchitectury非依存になり、ExtendedMenuProviderは自前実装(core.mc261)へ移された。
+        // 旧MODはPlayer.openExtendedMenu(Ldev/architectury/registry/menu/ExtendedMenuProvider;)Vを
+        // 呼ぶバイトコードを持っているため、引数の型を差し替える。
+        addClass("dev/architectury/registry/menu/ExtendedMenuProvider", "net/pitan76/mcpitanlib/core/mc261/ExtendedMenuProvider");
+
         if (!isServerOnly) {
             try {
                 addClass("net/minecraft/class_4185", Button.class); // ButtonWidget
