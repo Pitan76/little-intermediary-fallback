@@ -3,6 +3,7 @@ package net.pitan76.littleintermediaryfallback;
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 import net.pitan76.littleintermediaryfallback.asm.LittleIntermediaryFallbackTransformer2;
+import net.pitan76.littleintermediaryfallback.asm.MixinTransformerHook;
 
 import java.lang.instrument.Instrumentation;
 
@@ -39,13 +40,44 @@ public class LittleIntermediaryFallbackPreLaunch implements PreLaunchEntrypoint 
         Config.init();
         if (!Config.isEnabled()) return;
 
-        Instrumentation inst = ByteBuddyAgent.install();
         // 時間を計測してみる
-        int startTime = (int) System.currentTimeMillis();
-        System.out.println("[LittleIntermediaryFallback] PreLaunch: Instrumentation attached");
-        inst.addTransformer(new LittleIntermediaryFallbackTransformer2(Config.getTargetPackages()));
-        int endTime = (int) System.currentTimeMillis();
-        System.out.println("[LittleIntermediaryFallback] Global ASM Transformer injected successfully. Convert time: " + (endTime - startTime) + "ms.");
+        long startTime = System.currentTimeMillis();
+
+        // Knotのミックスイントランスフォーマーをラップする経路を優先する。
+        // JVMのagent attachを一切使わないため、動的agentロードが制限された環境でも動作する。
+        if (MixinTransformerHook.install(Config.getTargetPackages())) {
+            System.out.println("[LittleIntermediaryFallback] Global ASM Transformer injected via the mixin transformer. Convert time: "
+                    + (System.currentTimeMillis() - startTime) + "ms.");
+            return;
+        }
+
+        // ミックスイン経路が使えない場合のみ、従来のagent attachにフォールバックする
+        System.err.println("[LittleIntermediaryFallback] Falling back to the instrumentation agent");
+
+        if (installViaAgent()) {
+            System.out.println("[LittleIntermediaryFallback] Global ASM Transformer injected via the instrumentation agent. Convert time: "
+                    + (System.currentTimeMillis() - startTime) + "ms.");
+            return;
+        }
+
+        System.err.println("[LittleIntermediaryFallback] ==================================================================");
+        System.err.println("[LittleIntermediaryFallback] Could not install the intermediary fallback transformer.");
+        System.err.println("[LittleIntermediaryFallback] Mods that were built against older mappings may fail to load.");
+        System.err.println("[LittleIntermediaryFallback] Add -XX:+EnableDynamicAgentLoading -Djdk.attach.allowAttachSelf=true");
+        System.err.println("[LittleIntermediaryFallback] to your JVM arguments, or report this with your full log.");
+        System.err.println("[LittleIntermediaryFallback] ==================================================================");
+    }
+
+    private boolean installViaAgent() {
+        try {
+            Instrumentation inst = ByteBuddyAgent.install();
+            inst.addTransformer(new LittleIntermediaryFallbackTransformer2(Config.getTargetPackages()));
+            return true;
+        } catch (Throwable t) {
+            System.err.println("[LittleIntermediaryFallback] Failed to attach the instrumentation agent");
+            t.printStackTrace();
+            return false;
+        }
     }
 
 //        System.out.println("[LittleIntermediaryFallback] PreLaunch: Adding ClassTinkerers transformation");
