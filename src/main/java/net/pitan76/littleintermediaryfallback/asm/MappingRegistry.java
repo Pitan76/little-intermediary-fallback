@@ -157,6 +157,21 @@ public class MappingRegistry {
     }
 
     static {
+        try {
+            register();
+        } catch (Throwable t) {
+            // Minecraftのバージョン差でクラスが移動/削除されていると、クラスリテラルの解決に失敗する。
+            // ここで例外を投げるとMappingRegistry自体が初期化不能(ExceptionInInitializerError)になり、
+            // 以降すべての変換が"Could not initialize class"で死んでフォールバック機能が完全に停止する。
+            // 登録済みの分だけでも残して動かすため、握り潰して警告を出す。
+            System.err.println("[LittleIntermediaryFallback] Mapping registration stopped partway: " + t);
+            System.err.println("[LittleIntermediaryFallback] This build targets a different Minecraft version than the one running."
+                    + " Registered " + CLASS_MAP.size() + " classes / " + METHOD_MAP.size() + " methods / " + FIELD_MAP.size()
+                    + " fields before failing. Mappings after that point are missing.");
+        }
+    }
+
+    private static void register() {
         addClass("net/minecraft/class_2960", Identifier.class);
         addClass("net/minecraft/class_1309", LivingEntity.class);
         addClass("net/minecraft/class_1429", Animal.class); // AnimalEntity
